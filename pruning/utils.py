@@ -66,7 +66,7 @@ def get_filter_mask(model, rate, args):
 
     threshold = np.sort(importance)[int(len(importance) * rate)]
     #threshold = np.percentile(importance, rate)
-    filter_mask = np.greater(importance, threshold)
+    filter_mask = np.greater(importance_all, threshold)
     return filter_mask
 
 
