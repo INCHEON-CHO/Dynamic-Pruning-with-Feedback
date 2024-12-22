@@ -244,7 +244,7 @@ def train(args, train_loader, epoch, model, criterion, optimizer, **kwargs):
             if (globals()['iterations']+1) % args.prune_freq==0 and (epoch+1) <= args.milestones[1]:
                 target_sparsity = args.prune_rate - args.prune_rate * (1 - (globals()['iterations'])/(args.milestones[1] * len(train_loader)))**3
                 if args.prune_type == 'structured':
-                    filter_mask = pruning.get_filter_mask(model, rate, args)
+                    filter_mask = pruning.get_filter_mask(model, target_sparsity, args)
                     pruning.filter_prune(model, filter_mask)
                 elif args.prune_type == 'unstructured':
                     threshold = pruning.get_weight_threshold(model, target_sparsity, args)
